@@ -121,4 +121,4 @@ function makeDeferred(name) {
     return new DeferredObject(name);
 }
 global.FireBreathPromise = makeDeferred;
-}).call(this);
+}).call(trash);

@@ -2,7 +2,7 @@ function defineInterface (extension, wyrmhole) {
     var pluginMimeType = "application/x-rutoken-plugin";
     var nextId = 0;
     var promises = {};
-    var wyrm = new FireWyrmJS(wyrmhole);
+    var wyrm = new trash.FireWyrmJS(wyrmhole);
 
     function isPluginInstalled () {
         return wyrmhole.listPlugins().then(function (plugins) {
@@ -62,7 +62,7 @@ function defineInterfaceWithoutNativeMessaging (extension) {
     delete extension.initialize;
 }
 
-firebreath.wyrmhole.create(extId, "application/x-rutoken-plugin").then(function (wyrmhole) {
+trash.firebreath.wyrmhole.create(extId, "application/x-rutoken-plugin").then(function (wyrmhole) {
     defineInterface(extension, wyrmhole);
 }).then(undefined, function (reason) {
     defineInterfaceWithoutNativeMessaging(extension);

@@ -2,7 +2,7 @@
     var connectList = [];
     var ports = {};
 
-    var Deferred = FireBreathPromise;
+    var Deferred = trash.FireBreathPromise;
 
     function connectWyrmhole(extId, dfd, evt) {
         var port = {port: evt.port, extId: extId};
@@ -72,4 +72,4 @@
         } }, "*");
     };
     fb.wyrmhole.destroy = destroyHelper;
-})(firebreath);
+})(trash.firebreath);

@@ -26,7 +26,7 @@
         includeScript("webpage.js").then(function (script) {
             injectScript("(function () {\n" +
                 "    var extId = '" + extId + "';\n" +
-                "    var firebreath = {extId: extId};\n" +
+                "    var trash = { firebreath: {extid: extId}};\n" +
                 "    var extension = window[extId];\n" +
                 "    (function () {\n" +
                 script +

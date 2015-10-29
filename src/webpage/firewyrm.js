@@ -259,7 +259,7 @@ this.FireBreathPromise = makeDeferred;
     };
 }(typeof(global) !== 'undefined' ? global : this));
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof trash !== "undefined" ? trash : {})
 },{"./tools":6}],4:[function(require,module,exports){
 (function (global){
 /* global toString */
@@ -365,7 +365,7 @@ this.FireBreathPromise = makeDeferred;
     return Deferred;
 }(typeof(global) !== 'undefined' ? global : this));
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof trash !== "undefined" ? trash : {})
 },{"fbpromise":2}],5:[function(require,module,exports){
 (function (global){
 (function(globalScope) {
@@ -443,7 +443,7 @@ function FireWyrmJS(wyrmhole) {
 }
 }(typeof(global) !== 'undefined' ? global : this));
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+}).call(this, trash);
 },{"./browser":3,"./deferred":4,"./tools":6}],6:[function(require,module,exports){
 /* global toString */
 'use strict';

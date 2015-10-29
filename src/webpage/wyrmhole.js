@@ -1,5 +1,5 @@
 /*global chrome,firebreath*/
-(function(fb) {
+(function(trash, fb) {
     fb.wyrmhole = {
         instances: [],
         create: createWyrmhole,
@@ -10,7 +10,7 @@
 
     var nativeHostApp = "ru.rutoken.firewyrmhost";
 
-    var Deferred = FireBreathPromise
+    var Deferred = trash.FireBreathPromise;
 
     function connectWyrmhole(application) {
         var dfd = Deferred();
@@ -243,4 +243,4 @@
             });
         };
     }
-})(firebreath);
+})(trash, trash.firebreath);
