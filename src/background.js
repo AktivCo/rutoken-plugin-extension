@@ -4,6 +4,7 @@ var firebreath = {}; //global object
 var ports = {};
 var hostName = "ru.rutoken.firewyrmhost";
 var mimeType = "application/x-rutoken-plugin";
+var _browser = window.chrome ? chrome : browser;
 
 console.log("Starting background script");
 
@@ -20,10 +21,10 @@ console.log("Starting background script");
 //});
 
 /* Example of using Fire Wyrm via webpage */
-chrome.runtime.onConnect.addListener(function(scriptPort) {
+_browser.runtime.onConnect.addListener(function(scriptPort) {
     console.log("Connected!");
     var name = scriptPort.name;
-    var hostPort = chrome.runtime.connectNative(hostName);
+    var hostPort = _browser.runtime.connectNative(hostName);
     var self = ports[name] = {
         script: scriptPort,
         host: hostPort
@@ -45,9 +46,9 @@ chrome.runtime.onConnect.addListener(function(scriptPort) {
     hostPort.onDisconnect.addListener(function() {
         // The host (native message host) disconnected, so disconnect
         // the script port. If there is an error, report it first
-        if (chrome.runtime.lastError) {
-            scriptPort.postMessage({error: "Disconnected", message: chrome.runtime.lastError.message});
-            console.warn("Disconnected:", chrome.runtime.lastError.message);
+        if (_browser.runtime.lastError) {
+            scriptPort.postMessage({error: "Disconnected", message: _browser.runtime.lastError.message});
+            console.warn("Disconnected:", _browser.runtime.lastError.message);
         } else {
             scriptPort.postMessage({error: "Disconnected"});
         }

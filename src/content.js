@@ -1,8 +1,10 @@
 (function() {
     var nextId = 1;
     var ports = {};
-    var extId = chrome.runtime.id;
+    var _browser = window.chrome ? chrome : browser;
+    var extId = _browser.runtime.id;
     var handlers = {};
+    var objId = "C3B7563B-BF85-45B7-88FC-7CFF1BD3C2DB"
 
     window.addEventListener("message", function (event) {
         if (event.source != window || typeof event.data === "undefined") { return; }
@@ -26,8 +28,9 @@
         includeScript("webpage.js").then(function (script) {
             injectScript("(function () {\n" +
                 "    var extId = '" + extId + "';\n" +
+                "    var objId = '" + objId + "';\n" +
                 "    var trash = { firebreath: {extid: extId}};\n" +
-                "    var extension = window[extId];\n" +
+                "    var extension = window[objId];\n" +
                 "    (function () {\n" +
                 script +
                 "    }).call();\n" +
@@ -39,7 +42,7 @@
 
     handlers.createWyrmhole = function () {
         var portName = "FireWyrmPort" + (nextId++);
-        var port = chrome.runtime.connect(extId, {name: portName});
+        var port = _browser.runtime.connect(extId, {name: portName});
         ports[portName] = port;
 
         window.postMessage({ rutoken: {
@@ -96,7 +99,7 @@
                 }
             };
 
-            req.open("GET", chrome.extension.getURL(path));
+            req.open("GET", _browser.extension.getURL(path));
             req.send();
         });
     }
@@ -112,8 +115,9 @@
 
     (function () {
         var script = document.createElement('script');
-        script.textContent = '(' + function(extId) {
-            var extension = window[extId] = {};
+        script.textContent = '(' + function(extId, objId) {
+            var extension = window[objId] = {};
+            window["ohedcglhbbfdgaogjhcclacoccbagkjg"] = extension;
             extension.initialize = function () {
                 if (extension.initializePromise) {
                     throw "initialise has already been called";
@@ -128,7 +132,7 @@
                     window.postMessage({ rutoken: { ext: extId, source: "webpage", action: "initialize" } }, "*");
                 });
             };
-        } + ')(' + JSON.stringify(extId) + ')';
+        } + ')(' + JSON.stringify(extId) + ',' + JSON.stringify(objId) + ')';
         (document.head || document.documentElement).appendChild(script);
         script.parentNode.removeChild(script);
     }());
