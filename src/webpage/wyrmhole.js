@@ -1,4 +1,5 @@
 /*global chrome,firebreath*/
+var portCreated = [];
 (function(trash, fb) {
     fb.wyrmhole = {
         instances: [],
@@ -38,6 +39,7 @@
         }
         fb.wyrmhole.connect(application).then(function(resp) {
             var wyrmhole = new Wyrmhole(resp.port, resp.sink);
+            portCreated[resp.port.port] = true;
             fb.wyrmhole.instances.push(wyrmhole);
 
             if (typeof mimetype == 'string') {

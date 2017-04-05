@@ -1,7 +1,7 @@
 (function(fb) {
     var connectList = [];
     var ports = {};
-
+    var qEvents = []; // map by ports for queues of events
     var Deferred = trash.FireBreathPromise;
 
     function connectWyrmhole(extId, dfd, evt) {
@@ -33,11 +33,21 @@
                     connectWyrmhole(cur.extId, cur.dfd, event.data.rutoken);
                 }
             } else {
-                var port = event.data.rutoken.port;
-                if (!ports[port]) {
+                if (!qEvents[event.data.rutoken.port]) {
+                    qEvents[event.data.rutoken.port] = [];
+                }
+                qEvents[event.data.rutoken.port].push(event);
+            }
+        }
+
+        var portName = event.data.rutoken.port;
+        if (portCreated[portName] && typeof qEvents[portName] != 'undefined') {
+            while (qEvents[portName].length) {
+                var e = qEvents[portName].shift();
+                if (!ports[portName]) {
                     console.error("Invalid port!");
                 } else {
-                    ports[port](event.data.rutoken);
+                    ports[portName](e.data.rutoken);
                 }
             }
         }
