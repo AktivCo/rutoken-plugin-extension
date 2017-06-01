@@ -194,7 +194,6 @@ this.FireBreathPromise = makeDeferred;
         params = params || {};
         var browser = {};
         Object.defineProperties(browser, {
-            'eval': { value: evalFn, enumerable: true },
             getDocument: { value: getDocument, enumerable: true },
             getWindow: { value: getWindow, enumerable: true },
             invokeWithDelay: { value: invokeWithDelay, enumerable: true },
@@ -202,17 +201,6 @@ this.FireBreathPromise = makeDeferred;
             readObject: { value: readObject, enumerable: true },
         });
         return browser;
-
-
-        function evalFn(str) {
-            try {
-                return eval(str); // jshint ignore:line
-            } catch(error) {
-                var ret = { $type: 'error', data: { error: 'exception thrown', message: error && error.message }};
-                if (error.stack) { ret.stack = error.stack; }
-                return ret;
-            }
-        }
 
         function invokeWithDelay(delay, obj, args, fname) {
             var fnToCall = fname ? (obj && obj[fname]) : obj;
