@@ -15,3 +15,4 @@ if __name__ == "__main__":
 	copyfile("./manifest.firefox.json", "./manifest.json")
 	system("npm update")
 	system("gulp")
+	remove("./manifest.json")

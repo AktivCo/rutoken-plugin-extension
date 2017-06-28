@@ -12,8 +12,7 @@ if __name__ == "__main__":
 	if path.exists("./manifest.json"):
 		remove("./manifest.json")
 		
-	copyfile("./manifest.chrome.json", "./manifest.json")
+	copyfile("./manifest.edge.json", "./manifest.json")
 	system("npm update")
 	system("gulp")
 	remove("./manifest.json")
-    

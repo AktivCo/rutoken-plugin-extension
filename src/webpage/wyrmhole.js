@@ -15,7 +15,7 @@ var portCreated = [];
 
     function connectWyrmhole(application) {
         var dfd = Deferred();
-        var _browser = window.chrome ? chrome : browser;
+        var _browser = (!!window.chrome && !!chrome.runtime) ? chrome : browser;
         var port = _browser.runtime.connectNative(application || nativeHostApp);
         var sink = function(sink) {
             port.onMessage.addListener(sink);

@@ -4,7 +4,9 @@ var firebreath = {}; //global object
 var ports = {};
 var hostName = "ru.rutoken.firewyrmhost";
 var mimeType = "application/x-rutoken-plugin";
-var _browser = window.chrome ? chrome : browser;
+var isIE = /*@cc_on!@*/false || !!document.documentMode;
+var isEdge = !isIE && !!window.StyleMedia;
+var _browser = (!!window.chrome && !!chrome.runtime) ? chrome : browser;
 
 console.log("Starting background script");
 
@@ -37,7 +39,19 @@ _browser.runtime.onConnect.addListener(function(scriptPort) {
     hostPort.onMessage.addListener(function(msg) {
         // Message from the native message host,
         // post it to the content script (to the page)
-        scriptPort.postMessage(msg);
+        var obj = msg;
+        if(isEdge) {
+            // mandatory but useless response from uwp app
+            if (msg === "edge_ack")
+                return;
+            try {
+                // edge doesn't parse json
+                obj = JSON.parse(msg);
+            } catch (e) {
+                obj = msg;
+            }
+        }
+        scriptPort.postMessage(obj);
     });
     scriptPort.onDisconnect.addListener(function() {
         // The script disconnected, so disconnect the hostPort

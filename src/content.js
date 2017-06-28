@@ -1,7 +1,7 @@
 (function() {
     var nextId = 1;
     var ports = {};
-    var _browser = window.chrome ? chrome : browser;
+    var _browser = (!!window.chrome && !!chrome.runtime) ? chrome : browser;
     var extId = _browser.runtime.id;
     var handlers = {};
     var objId = "C3B7563B-BF85-45B7-88FC-7CFF1BD3C2DB"
@@ -117,7 +117,12 @@
         var script = document.createElement('script');
         script.textContent = '(' + function(extId, objId) {
             var extension = window[objId] = {};
-            window["ohedcglhbbfdgaogjhcclacoccbagkjg"] = extension;
+            var isIE = /*@cc_on!@*/false || !!document.documentMode;
+            var isEdge = !isIE && !!window.StyleMedia;
+            if (isEdge)
+                window["EdgeExtension_CJSCAktiv-Soft.AdapterRutokenPlugin_d5nnqc4r3dr54"] = extension;
+            else
+                window["ohedcglhbbfdgaogjhcclacoccbagkjg"] = extension;
             extension.initialize = function () {
                 if (extension.initializePromise) {
                     throw "initialise has already been called";
