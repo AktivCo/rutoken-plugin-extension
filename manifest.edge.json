@@ -1,7 +1,7 @@
 {
   "name": "Adapter Rutoken Plugin",
   "author": "CJSC Aktiv-Soft",
-  "version": "1.0.5.0",
+  "version": "RUTOKEN_PLUGIN_DOT_SEPARATED_VERSION",
   "description": "Позволяет использовать Рутокен Плагин",
   "icons": {
     "16": "icon16.png",
