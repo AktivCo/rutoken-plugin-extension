@@ -1,8 +1,8 @@
 {
-  "name": "Adapter Rutoken Plugin",
-  "author": "CJSC Aktiv-Soft",
+  "name": "Рутокен Плагин для Edge",
+  "author": "Компания \"Актив\"",
   "version": "RUTOKEN_PLUGIN_DOT_SEPARATED_VERSION",
-  "description": "Позволяет использовать Рутокен Плагин",
+  "description": "Рутокен Плагин представляет собой решение для электронной подписи, шифрования и двухфакторной аутентификации для Web- и SaaS-сервисов.",
   "icons": {
     "16": "icon16.png",
     "48": "icon48.png",
